@@ -1,0 +1,11 @@
+// Vitest Snapshot v1
+
+exports[`<App /> > renders 1`] = `
+<div>
+  <div
+    class="App"
+  >
+    OK
+  </div>
+</div>
+`;

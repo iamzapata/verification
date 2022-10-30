@@ -1,0 +1,14 @@
+:root {
+  --vflow-font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  --vflow-font-size: 16px;
+
+  --vflow-color-scheme: light dark;
+  --vflow-color: rgba(255, 255, 255, 0.87);
+  --vflow-background-color: #242424;
+}
+
+@media (prefers-color-scheme: light) {
+}
+
+@media (prefers-reduced-motion: no-preference) {
+}

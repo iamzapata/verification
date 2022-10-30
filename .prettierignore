@@ -1,0 +1,9 @@
+# Ignore artifacts:
+build
+coverage
+.vscode
+.vercel
+.next
+.husky
+public
+node_modules
