@@ -12,7 +12,7 @@
     "prettify": "prettier --write src/**/*.{ts,tsx}",
     "type-check": "tsc --noEmit",
     "prepare": "husky install",
-    "test": "echo 'hi'"
+    "test": "vitest"
   },
   "dependencies": {
     "react": "^18.2.0",
