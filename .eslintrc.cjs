@@ -15,6 +15,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'prettier',
   ],
   parser: '@typescript-eslint/parser',
@@ -24,10 +25,12 @@ module.exports = {
     },
     ecmaVersion: 'latest',
     sourceType: 'module',
+    tsconfigRootDir: __dirname,
+    project: ['./tsconfig.json'],
   },
   plugins: ['react', 'react-hooks', '@typescript-eslint', 'prettier'],
   rules: {
     'react/react-in-jsx-scope': 'off',
-    '@typescript-eslint/consistent-type-imports': 'warn',
+    '@typescript-eslint/consistent-type-imports': 'error',
   },
 }
