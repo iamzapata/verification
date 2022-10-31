@@ -1,8 +1,12 @@
 import './App.css'
-import { Button } from '@components'
+import { ChecksContainer } from './components/ChecksContainer'
 
 function App() {
-  return <div className="App"></div>
+  return (
+    <div className="App">
+      <ChecksContainer />
+    </div>
+  )
 }
 
 export default App

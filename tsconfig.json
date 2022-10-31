@@ -27,13 +27,19 @@
       "@styles/*": [
         "src/styles/*"
       ],
-      "@utils/*": [
-        "src/utils/*"
+      "@utils": [
+        "src/utils/index.ts"
+      ],
+      "@api": [
+        "src/api/index.ts"
       ],
     }
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "vitest.config.js"
   ],
   "references": [
     {

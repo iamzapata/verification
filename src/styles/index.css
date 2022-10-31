@@ -1,0 +1,31 @@
+@import './reset.css';
+
+:root {
+  --font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  --font-size: 14px;
+
+  --color-scheme: light dark;
+  --text-color: #ffffff;
+  --background-color: #242424;
+  --primary-color: #004e5f;
+  --highlight-color: #def7f7;
+
+  --border-transparent: 1px solid transparent;
+  --border-radius-sm: 4px;
+  --border-radius-lg: 6px;
+  --box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+  --padding-xs: 4px;
+  --padding-sm: 8px;
+  --padding-lg: 12px;
+
+  background-color: snow;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+}
+
+@media (prefers-color-scheme: light) {
+}
+
+@media (prefers-reduced-motion: no-preference) {
+}

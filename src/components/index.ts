@@ -1,1 +1,6 @@
 export { Button } from './Button'
+export { Error } from './Error'
+export { LoadingSpinner } from './LoadingSpinner'
+export { ChecksList } from './ChecksList'
+export { CheckItem } from './CheckItem'
+export { Submit } from './Submit'

@@ -1,7 +1,8 @@
 import styles from './Button.module.css'
-
+import { classNames } from '@utils'
 interface ButtonProps {
-  children: JSX.Element
+  children: JSX.Element | string
+  className?: string
   disabled?: boolean
   type?: 'button' | 'submit' | 'reset' | undefined
   onClick?: () => void
@@ -9,13 +10,14 @@ interface ButtonProps {
 
 const Button = ({
   children,
+  className = '',
   disabled = false,
   type = 'button',
   onClick,
 }: ButtonProps) => {
   return (
     <button
-      className={styles.Button}
+      className={classNames(styles.Button, className)}
       disabled={disabled}
       type={type}
       onClick={onClick}
