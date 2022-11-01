@@ -32,6 +32,49 @@ describe('<Button />', () => {
     expect(button).toBeDisabled()
   })
 
+  it('should take an "active" prop', () => {
+    const { getByText, rerender } = render(
+      <Button active>
+        <>Foo</>
+      </Button>
+    )
+    const button = getByText(/foo/i)
+
+    expect(button).toHaveClass('isActive')
+    expect(button).not.toHaveClass('isInactive')
+
+    rerender(
+      <Button>
+        <>Foo</>
+      </Button>
+    )
+
+    expect(button).not.toHaveClass('isActive')
+    expect(button).toHaveClass('isInactive')
+  })
+
+  it('should take a "start" prop', () => {
+    const { getByText } = render(
+      <Button start>
+        <>Foo</>
+      </Button>
+    )
+    const button = getByText(/foo/i)
+
+    expect(button).toHaveClass('isStart')
+  })
+
+  it('should take an "end" prop', () => {
+    const { getByText } = render(
+      <Button end>
+        <>Foo</>
+      </Button>
+    )
+    const button = getByText(/foo/i)
+
+    expect(button).toHaveClass('isEnd')
+  })
+
   it('should take a "type" prop', () => {
     const { getByText, rerender } = render(
       <Button>

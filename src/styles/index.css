@@ -4,8 +4,10 @@
   --font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   --font-size: 14px;
 
+  --color-white: #ffffff;
+
   --color-scheme: light dark;
-  --text-color: #ffffff;
+  --text-color: var(--color-white);
   --background-color: #242424;
   --primary-color: #004e5f;
   --highlight-color: #def7f7;

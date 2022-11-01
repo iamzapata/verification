@@ -1,4 +1,5 @@
 .ChecksContainer {
+  background-color: var(--color-white);
   padding: var(--padding-lg);
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius-lg);

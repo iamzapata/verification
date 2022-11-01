@@ -1,26 +1,46 @@
 .Button {
   --text-color-disabled: #bdc0cf;
   --background-color-disabled: #e6ebf4;
-
   font-weight: 500;
-  line-height: 40px;
+  line-height: 1;
   letter-spacing: 0.4px;
   text-align: center;
   user-select: none;
-  border: var(--border-transparent);
-  background-color: var(--primary-color);
-  color: var(--text-color);
-
   position: relative;
-  height: 40px;
+  height: 30px;
+  width: 60px;
   padding: 0 16px;
   border-radius: var(--border-radius-sm);
   cursor: pointer;
 }
 
+.isActive {
+  color: var(--color-white);
+  background-color: var(--primary-color);
+  border: var(--border-transparent);
+}
+
+.isInactive {
+  color: var(--primary-color);
+  background-color: var(--color-white);
+  border: solid 1px var(--primary-color);
+}
+
+.isStart {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.isEnd {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: none;
+}
+
 .Button:disabled {
   background-color: var(--background-color-disabled);
   color: var(--text-color-disabled);
+  border: solid 1px var(--text-color-disabled);
   cursor: not-allowed;
 }
 

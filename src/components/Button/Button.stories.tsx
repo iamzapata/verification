@@ -18,10 +18,32 @@ const Template: StoryFn<typeof Button> = (args) => (
   </Button>
 )
 
-export const Enabled = Template.bind({})
-Enabled.args = {
-  disabled: false,
+export const Inactive = Template.bind({})
+Inactive.args = {
   children: 'Yes',
+  type: 'button',
+}
+
+export const Active = Template.bind({})
+Active.args = {
+  active: true,
+  children: 'No',
+  type: 'button',
+}
+
+export const IsStart = Template.bind({})
+IsStart.args = {
+  active: true,
+  start: true,
+  children: 'No',
+  type: 'button',
+}
+
+export const IsEnd = Template.bind({})
+IsEnd.args = {
+  active: true,
+  end: true,
+  children: 'No',
   type: 'button',
 }
 
