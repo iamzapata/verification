@@ -1,2 +1,13 @@
 .CheckItem {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.CheckItem:hover:not(.isInactive) {
+  background-color: var(--color-grey-lighter);
+}
+
+.isInactive {
+  color: var(--text-color-disabled);
+  background-color: transparent;
 }
