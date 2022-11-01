@@ -51,7 +51,7 @@ describe('<Button />', () => {
     expect(button).toHaveAttribute('type', 'submit')
   })
 
-  it('should handle "onClick" events ', async () => {
+  it('should handle "onClick" event', async () => {
     const onClickMock = vi.fn()
 
     const { user, getByText } = renderWithUserEvent(
@@ -65,5 +65,21 @@ describe('<Button />', () => {
     await user.click(button)
 
     expect(onClickMock).toHaveBeenCalledTimes(1)
+  })
+
+  it('should not handle "onClick" event when "disabled"', async () => {
+    const onClickMock = vi.fn()
+
+    const { user, getByText } = renderWithUserEvent(
+      <Button onClick={onClickMock} disabled>
+        <>Foo</>
+      </Button>
+    )
+
+    const button = getByText(/foo/i)
+
+    await user.click(button)
+
+    expect(onClickMock).not.toHaveBeenCalledTimes(1)
   })
 })
