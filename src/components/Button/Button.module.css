@@ -1,6 +1,4 @@
 .Button {
-  --text-color-disabled: #bdc0cf;
-  --background-color-disabled: #e6ebf4;
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0.4px;
@@ -8,22 +6,28 @@
   user-select: none;
   position: relative;
   height: 30px;
-  width: 60px;
   padding: 0 16px;
   border-radius: var(--border-radius-sm);
   cursor: pointer;
 }
 
-.isActive {
+.isSelected {
   color: var(--color-white);
   background-color: var(--primary-color);
   border: var(--border-transparent);
 }
 
-.isInactive {
+.isUnselected {
   color: var(--primary-color);
   background-color: var(--color-white);
   border: solid 1px var(--primary-color);
+}
+
+.isInactive {
+  color: var(--text-color-disabled);
+  background-color: var(--color-white);
+  border: solid 1px var(--background-color-disabled);
+  pointer-events: none;
 }
 
 .isStart {
@@ -42,6 +46,10 @@
   color: var(--text-color-disabled);
   border: solid 1px var(--text-color-disabled);
   cursor: not-allowed;
+}
+
+.Button:hover {
+  background-color: var(--highlight-color);
 }
 
 .Button:enabled:hover,

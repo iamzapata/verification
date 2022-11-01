@@ -3,8 +3,9 @@ import { classNames } from '@utils'
 interface ButtonProps {
   children: JSX.Element | string
   className?: string
-  active?: boolean
+  selected?: boolean
   disabled?: boolean
+  inactive?: boolean
   start?: boolean
   end?: boolean
   type?: 'button' | 'submit' | 'reset' | undefined
@@ -14,8 +15,9 @@ interface ButtonProps {
 const Button = ({
   children,
   className = '',
-  active = false,
+  selected = false,
   disabled = false,
+  inactive = false,
   start = false,
   end = false,
   type = 'button',
@@ -25,7 +27,8 @@ const Button = ({
     <button
       className={classNames(
         styles.Button,
-        active ? styles.isActive : styles.isInactive,
+        selected ? styles.isSelected : styles.isUnselected,
+        inactive && styles.isInactive,
         start && styles.isStart,
         end && styles.isEnd,
         className

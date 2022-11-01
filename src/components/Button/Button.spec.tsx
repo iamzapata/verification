@@ -32,16 +32,16 @@ describe('<Button />', () => {
     expect(button).toBeDisabled()
   })
 
-  it('should take an "active" prop', () => {
+  it('should take an "selected" prop', () => {
     const { getByText, rerender } = render(
-      <Button active>
+      <Button selected>
         <>Foo</>
       </Button>
     )
     const button = getByText(/foo/i)
 
-    expect(button).toHaveClass('isActive')
-    expect(button).not.toHaveClass('isInactive')
+    expect(button).toHaveClass('isSelected')
+    expect(button).not.toHaveClass('isUnselected')
 
     rerender(
       <Button>
@@ -49,7 +49,18 @@ describe('<Button />', () => {
       </Button>
     )
 
-    expect(button).not.toHaveClass('isActive')
+    expect(button).not.toHaveClass('isSelected')
+    expect(button).toHaveClass('isUnselected')
+  })
+
+  it('should take an "inactive" prop', () => {
+    const { getByText } = render(
+      <Button inactive>
+        <>Foo</>
+      </Button>
+    )
+    const button = getByText(/foo/i)
+
     expect(button).toHaveClass('isInactive')
   })
 

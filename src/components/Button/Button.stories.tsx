@@ -18,22 +18,29 @@ const Template: StoryFn<typeof Button> = (args) => (
   </Button>
 )
 
-export const Inactive = Template.bind({})
-Inactive.args = {
+export const Unselected = Template.bind({})
+Unselected.args = {
   children: 'Yes',
   type: 'button',
 }
 
-export const Active = Template.bind({})
-Active.args = {
-  active: true,
+export const Selected = Template.bind({})
+Selected.args = {
+  selected: true,
+  children: 'No',
+  type: 'button',
+}
+
+export const Inactive = Template.bind({})
+Inactive.args = {
+  inactive: true,
   children: 'No',
   type: 'button',
 }
 
 export const IsStart = Template.bind({})
 IsStart.args = {
-  active: true,
+  selected: true,
   start: true,
   children: 'No',
   type: 'button',
@@ -41,7 +48,7 @@ IsStart.args = {
 
 export const IsEnd = Template.bind({})
 IsEnd.args = {
-  active: true,
+  selected: true,
   end: true,
   children: 'No',
   type: 'button',
