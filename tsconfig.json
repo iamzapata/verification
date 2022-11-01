@@ -36,6 +36,9 @@
       "@api": [
         "src/api/index.ts"
       ],
+      "@testing": [
+        "src/__testing__/index.ts"
+      ]
     }
   },
   "include": [
