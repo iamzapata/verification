@@ -12,7 +12,7 @@ interface ButtonProps {
   onClick?: () => void
 }
 
-const Button = ({
+function Button({
   children,
   className = '',
   selected = false,
@@ -22,7 +22,7 @@ const Button = ({
   end = false,
   type = 'button',
   onClick,
-}: ButtonProps) => {
+}: ButtonProps) {
   return (
     <button
       className={classNames(

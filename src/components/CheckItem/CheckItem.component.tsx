@@ -1,24 +1,22 @@
-import styles from './CheckItem.module.css'
-import { type Check } from '@api'
-import { ButtonGroup } from '@components'
-
 import { classNames } from '@utils'
+import type { Check } from '@store'
+import { ButtonGroup } from '@components'
+import styles from './CheckItem.module.css'
 
 interface CheckProps {
   check: Check
-  inactive: boolean
 }
-export function CheckItem({ check, inactive }: CheckProps) {
-  const { description } = check
+function CheckItem({ check }: CheckProps) {
+  const { description, inactive } = check
 
   return (
     <div
       className={classNames(styles.CheckItem, inactive && styles.isInactive)}
     >
       {description}
-      <ButtonGroup inactive={inactive} />
+      <ButtonGroup inactive={inactive} check={check} />
     </div>
   )
 }
 
-export { Check }
+export { CheckItem }

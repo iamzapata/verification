@@ -1,18 +1,14 @@
 import styles from './ChecksList.module.css'
-import { type Check } from '@api'
+import { type Check } from 'src/store'
 import { CheckItem } from '@components'
 
 interface ChecksListProps {
-  checks: Check[] | undefined
+  checks: Check[]
 }
-const ChecksList = ({ checks }: ChecksListProps) => {
-  if (!checks) return null
-
-  const sortedChecks = checks.slice(0).sort((a, b) => +a.priority - +b.priority)
-
+function ChecksList({ checks }: ChecksListProps) {
   return (
     <section className={styles.ChecksList}>
-      {sortedChecks.map((check) => (
+      {checks.map(check => (
         <CheckItem key={check.id} check={check} />
       ))}
     </section>

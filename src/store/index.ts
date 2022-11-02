@@ -1,21 +1,21 @@
 import create from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-import { fetchChecks, type Validation } from '@api'
-
-type AnswerOption = typeof ANSWER_OPTIONS
-
-export type Answer = keyof AnswerOption
+import { type Validation, fetchChecks } from '@api'
 
 export interface Check extends Validation {
   inactive: boolean
   answer: keyof AnswerOption
 }
 
+type AnswerOption = typeof ANSWER_OPTIONS
+
+export type Answer = keyof AnswerOption
+
 export const ANSWER_OPTIONS = {
   YES: 'YES',
   NO: 'NO',
   UNANSWERED: 'UNANSWERED',
-}
+} as const
 
 interface State {
   meta: {
@@ -59,12 +59,13 @@ const withImmer = immer<State & Actions>((set, get) => ({
 
   fetch: async () => {
     try {
-      const checks = (await fetchChecks()) as Check[]
+      const checks = <Check[]>await fetchChecks()
       const sorted = checks.slice(0).sort((a, b) => a.priority - b.priority)
       const checksInactive = sorted.map((check, i) => {
         return {
           ...check,
           inactive: i > 0,
+          answer: ANSWER_OPTIONS.UNANSWERED,
         }
       })
 
@@ -106,7 +107,6 @@ const withImmer = immer<State & Actions>((set, get) => ({
     })
 
     set({ checks: newChecks })
-    return []
   },
 }))
 
