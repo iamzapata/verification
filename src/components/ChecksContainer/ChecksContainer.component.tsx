@@ -1,18 +1,19 @@
-import { useEffect } from 'react'
+import type { Check } from '@store'
 import { LoadingSpinner, Error, Submit, ChecksList } from '@components'
-import { useStore } from '@store'
 import styles from './ChecksContainer.module.css'
 
-function ChecksContainer() {
-  const checks = useStore(state => state.checks)
-  const { isLoading, hasError } = useStore(state => state.meta)
-  const isValid = useStore(state => state.isValid)
-  const fetch = useStore(state => state.fetch)
-
-  useEffect(() => {
-    void fetch()
-  }, [])
-
+interface ChecksContainerProps {
+  checks: Check[]
+  isValid: boolean
+  isLoading: boolean
+  hasError: boolean
+}
+function ChecksContainer({
+  checks,
+  isValid,
+  isLoading,
+  hasError,
+}: ChecksContainerProps) {
   if (isLoading) return <LoadingSpinner />
 
   if (hasError) return <Error />
@@ -20,7 +21,7 @@ function ChecksContainer() {
   return (
     <section className={styles.ChecksContainer}>
       <ChecksList checks={checks} />
-      <Submit className={styles.Submit} isValid={isValid()} />
+      <Submit className={styles.Submit} disabled={!isValid} />
     </section>
   )
 }

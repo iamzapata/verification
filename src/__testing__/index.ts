@@ -1,1 +1,1 @@
-export { checks } from './mockData'
+export { mockChecks } from './mockData'

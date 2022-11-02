@@ -5,14 +5,14 @@ import styles from './Submit.module.css'
 
 interface SubmitProps {
   className: string
-  isValid: boolean
+  disabled: boolean
 }
 
-const Submit = memo(function Submit({ className, isValid }: SubmitProps) {
+const Submit = memo(function Submit({ className, disabled }: SubmitProps) {
   return (
     <Button
       className={classNames(styles.Submit, className)}
-      disabled={!isValid}
+      disabled={disabled}
     >
       Submit
     </Button>
