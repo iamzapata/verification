@@ -38,6 +38,9 @@
       ],
       "@testing": [
         "src/__testing__/index.ts"
+      ],
+      "@store": [
+        "src/store/index.ts"
       ]
     }
   },
