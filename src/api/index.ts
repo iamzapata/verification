@@ -1,2 +1,2 @@
 export { fetchChecks, submitCheckResults } from './API'
-export type { Check, CheckResult } from './types'
+export type { Validation, ValidationResult } from './types'

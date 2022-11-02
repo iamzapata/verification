@@ -1,10 +1,10 @@
-export interface Check {
+export interface Validation {
   id: string
   priority: number
   description: string
 }
 
-export interface CheckResult {
+export interface ValidationResult {
   checkId: string
   value: string
 }
