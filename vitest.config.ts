@@ -10,6 +10,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['src/__testing__/setup.ts'],
     globals: true,
+    reporters: ['dot', 'verbose'],
     css: {
       modules: {
         // Simplifies unit tests by
