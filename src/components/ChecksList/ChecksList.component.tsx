@@ -1,5 +1,5 @@
 import styles from './ChecksList.module.css'
-import { type Check } from 'src/store'
+import { type Check } from '@store'
 import { CheckItem } from '@components'
 
 interface ChecksListProps {

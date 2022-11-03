@@ -1,7 +1,6 @@
 import { Button } from '@components'
 import type { Check, Answer } from '@store'
 import { ANSWER_OPTIONS, useStore } from '@store'
-
 import styles from './ButtonGroup.module.css'
 
 const { YES, NO } = ANSWER_OPTIONS

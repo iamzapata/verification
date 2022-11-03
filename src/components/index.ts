@@ -1,7 +1,4 @@
-export { Button } from './Button'
-export { Error } from './Error'
-export { LoadingSpinner } from './LoadingSpinner'
 export { ChecksList } from './ChecksList'
 export { CheckItem } from './CheckItem'
 export { ButtonGroup } from './ButtonGroup'
-export { Submit } from './Submit'
+export { Button, LoadingSpinner, Error, Submit } from './Common'
