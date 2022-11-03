@@ -25,15 +25,15 @@ describe('<App />', () => {
     }).not.toThrow()
   })
 
-  it('should fetch data on render', async () => {
-    vi.spyOn(store, 'fetch')
+  it('should call "getChecks" data on render', async () => {
+    vi.spyOn(store, 'getChecks')
 
     await act(() => {
       render(<App />)
     })
 
     await waitFor(() => {
-      expect(store.fetch).toHaveBeenCalledTimes(1)
+      expect(store.getChecks).toHaveBeenCalledTimes(1)
     })
   })
 })

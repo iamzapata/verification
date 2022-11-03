@@ -14,7 +14,7 @@ interface State {
 }
 
 interface Actions {
-  fetch: () => Promise<void>
+  getChecks: () => Promise<void>
   addAnswer: (check: Check, answer: Answer) => void
   isValid: () => boolean
   reset: () => void
@@ -36,7 +36,7 @@ const initialState = {
 
 const createActions = (set: SetState<Store>, get: GetState<Store>) =>
   ({
-    fetch: async () => {
+    getChecks: async () => {
       try {
         const checks = <Check[]>await fetchChecks()
         const sorted = checks.slice(0).sort((a, b) => a.priority - b.priority)
@@ -50,11 +50,13 @@ const createActions = (set: SetState<Store>, get: GetState<Store>) =>
 
         set({ checks: checksInactive })
       } catch (error: unknown) {
+        // @ts-ignore: Issues with immer wrapper. Find a way to fix this
         set(state => {
           state.meta.error = error
           state.meta.hasError = true
         })
       } finally {
+        // @ts-ignore: Issues with immer wrapper. Find a way to fix this
         set(state => {
           state.meta.isLoading = false
         })

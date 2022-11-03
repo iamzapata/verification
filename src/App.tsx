@@ -7,10 +7,10 @@ function App() {
   const checks = useStore(state => state.checks)
   const { isLoading, hasError } = useStore(state => state.meta)
   const isValid = useStore(state => state.isValid)
-  const fetch = useStore(state => state.fetch)
+  const getChecks = useStore(state => state.getChecks)
 
   useEffect(() => {
-    void fetch()
+    void getChecks()
   }, [])
 
   return (

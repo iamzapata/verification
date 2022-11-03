@@ -51,12 +51,12 @@ describe('useStore', () => {
     })
   })
 
-  describe('fetch', () => {
-    it('can fetch checks', async () => {
-      const { fetch } = getState()
+  describe('getChecks', () => {
+    it('can getChecks checks', async () => {
+      const { getChecks } = getState()
 
       await act(() => {
-        return fetch()
+        return getChecks()
       })
 
       const { checks } = getState()
@@ -65,10 +65,10 @@ describe('useStore', () => {
     })
 
     it('sorts checks by priority', async () => {
-      const { fetch } = getState()
+      const { getChecks } = getState()
 
       await act(() => {
-        return fetch()
+        return getChecks()
       })
 
       const { checks } = getState()
@@ -79,10 +79,10 @@ describe('useStore', () => {
     })
 
     it('sets "answer" and "inactive" properties', async () => {
-      const { fetch } = getState()
+      const { getChecks } = getState()
 
       await act(() => {
-        return fetch()
+        return getChecks()
       })
 
       const { checks } = getState()
@@ -96,13 +96,13 @@ describe('useStore', () => {
     })
 
     it('sets isLoading state correctly', async () => {
-      const { fetch } = getState()
+      const { getChecks } = getState()
       let isLoading = getState().meta.isLoading
 
       expect(isLoading).toEqual(true)
 
       await act(() => {
-        return fetch()
+        return getChecks()
       })
 
       isLoading = getState().meta.isLoading
@@ -120,10 +120,10 @@ describe('useStore', () => {
     })
 
     it('throws if invoked missing first argument', async () => {
-      const { addAnswer, fetch } = getState()
+      const { addAnswer, getChecks } = getState()
 
       await act(() => {
-        return fetch()
+        return getChecks()
       })
 
       // @ts-expect-error: Expected 2 arguments, but got 0.
@@ -131,10 +131,10 @@ describe('useStore', () => {
     })
 
     it('throws if invoked missing second argument', async () => {
-      const { addAnswer, fetch } = getState()
+      const { addAnswer, getChecks } = getState()
 
       await act(() => {
-        return fetch()
+        return getChecks()
       })
 
       const { checks } = getState()
@@ -146,10 +146,10 @@ describe('useStore', () => {
     })
 
     it('adds answer to a check and marks next item as "active"', async () => {
-      const { addAnswer, fetch } = getState()
+      const { addAnswer, getChecks } = getState()
 
       await act(() => {
-        return fetch()
+        return getChecks()
       })
 
       let checks = getState().checks
@@ -170,10 +170,10 @@ describe('useStore', () => {
     })
 
     it('preserves checks order after update', async () => {
-      const { fetch, addAnswer } = getState()
+      const { getChecks, addAnswer } = getState()
 
       await act(() => {
-        return fetch()
+        return getChecks()
       })
 
       const { checks } = getState()
@@ -194,20 +194,20 @@ describe('useStore', () => {
     })
 
     it('returns "false" if checks are not answered', async () => {
-      const { isValid, fetch } = getState()
+      const { isValid, getChecks } = getState()
 
       await act(() => {
-        return fetch()
+        return getChecks()
       })
 
       expect(isValid()).toEqual(false)
     })
 
     it('returns "true" if at least one answer is "NO"', async () => {
-      const { isValid, addAnswer, fetch } = getState()
+      const { isValid, addAnswer, getChecks } = getState()
 
       await act(() => {
-        return fetch()
+        return getChecks()
       })
 
       const { checks } = getState()
@@ -218,10 +218,10 @@ describe('useStore', () => {
     })
 
     it('returns "true" all answers are "YES"', async () => {
-      const { isValid, addAnswer, fetch } = getState()
+      const { isValid, addAnswer, getChecks } = getState()
 
       await act(() => {
-        return fetch()
+        return getChecks()
       })
 
       const { checks } = getState()
@@ -239,10 +239,10 @@ describe('useStore', () => {
 
   describe('reset', () => {
     it('resets store state', async () => {
-      const { reset, fetch } = getState()
+      const { reset, getChecks } = getState()
 
       await act(() => {
-        return fetch()
+        return getChecks()
       })
 
       expect(getState().checks.length).toEqual(3)
