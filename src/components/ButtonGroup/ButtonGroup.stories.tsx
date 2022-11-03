@@ -1,6 +1,9 @@
 import type { StoryFn, Meta } from '@storybook/react'
 
 import { ButtonGroup } from './ButtonGroup.component'
+import { mockChecks as checks } from '@testing'
+
+const check = checks[0]
 
 export default {
   title: 'Components/ButtonGroup',
@@ -8,14 +11,15 @@ export default {
   argTypes: {},
 } as Meta<typeof ButtonGroup>
 
-const Template: StoryFn<typeof ButtonGroup> = (args) => (
-  <ButtonGroup {...args} />
-)
+const Template: StoryFn<typeof ButtonGroup> = args => <ButtonGroup {...args} />
 
 export const Default = Template.bind({})
-Default.args = {}
+Default.args = {
+  check,
+}
 
 export const Inactive = Template.bind({})
 Inactive.args = {
   inactive: true,
+  check,
 }

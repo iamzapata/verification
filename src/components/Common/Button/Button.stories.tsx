@@ -3,7 +3,7 @@ import type { StoryFn, Meta } from '@storybook/react'
 import { Button } from './Button.component'
 
 export default {
-  title: 'Components/Button',
+  title: 'Components/Common/Button',
   component: Button,
   argTypes: {
     disabled: { control: 'boolean' },
@@ -12,7 +12,7 @@ export default {
   },
 } as Meta<typeof Button>
 
-const Template: StoryFn<typeof Button> = (args) => (
+const Template: StoryFn<typeof Button> = args => (
   <Button onClick={() => null} {...args}>
     {args.children}
   </Button>
