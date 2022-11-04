@@ -8,6 +8,7 @@ function App() {
   const { isLoading, hasError } = useStore(state => state.meta)
   const isValid = useStore(state => state.isValid)
   const getChecks = useStore(state => state.getChecks)
+  const resultsSubmitted = useStore(state => state.resultsSubmitted)
 
   useEffect(() => {
     void getChecks()
@@ -20,6 +21,7 @@ function App() {
         isLoading={isLoading}
         hasError={hasError}
         isValid={isValid()}
+        resultsSubmitted={resultsSubmitted}
       />
     </div>
   )
