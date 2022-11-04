@@ -1,6 +1,6 @@
 import create, { type StoreApi } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-import { fetchChecks } from '@api'
+import { fetchChecks, submitCheckResults } from '@api'
 import type { Check, Answer } from './types'
 import { ANSWER_OPTIONS } from './types'
 
@@ -11,10 +11,14 @@ interface State {
     error: unknown | null
   }
   checks: Check[]
+  selectedCheck: Check | null
+  resultsSubmitted: boolean
 }
 
 interface Actions {
   getChecks: () => Promise<void>
+  sendResults: () => Promise<void>
+  setSelected: (check: Check) => void
   addAnswer: (check: Check, answer: Answer) => void
   isValid: () => boolean
   reset: () => void
@@ -25,13 +29,15 @@ export type Store = State & Actions
 type SetState<T> = StoreApi<T>['setState']
 type GetState<T> = StoreApi<T>['getState']
 
-const initialState = {
+const initialState: State = {
   meta: {
     isLoading: true,
     hasError: false,
     error: null,
   },
   checks: [],
+  selectedCheck: null,
+  resultsSubmitted: false,
 }
 
 const createActions = (set: SetState<Store>, get: GetState<Store>) =>
@@ -63,6 +69,10 @@ const createActions = (set: SetState<Store>, get: GetState<Store>) =>
       }
     },
 
+    setSelected: selectedCheck => {
+      set({ selectedCheck })
+    },
+
     isValid: () => {
       const { checks } = get()
 
@@ -87,31 +97,67 @@ const createActions = (set: SetState<Store>, get: GetState<Store>) =>
       if (!answer) throw Error('Missing "answer" argument')
 
       const currentIndex = checks.findIndex(i => i.id === checkAnswered.id)
-      const nextItemId = checks[currentIndex + 1]?.id
+      const nextIndex = currentIndex + 1
+      const nextCheck = checks[currentIndex + 1]
 
-      const newChecks = checks.map(check => {
-        if (check.id === checkAnswered.id) {
-          return {
-            ...check,
-            answer,
-          }
+      const newCheck = {
+        ...checkAnswered,
+        answer,
+      }
+
+      const newChecks = checks.map((check, index) => {
+        if (check.id === newCheck.id) {
+          return newCheck
         }
 
-        if (check.id === nextItemId) {
-          return {
-            ...check,
-            inactive: false,
-          }
+        if (answer === ANSWER_OPTIONS.YES && index == nextIndex) {
+          return { ...nextCheck, inactive: false }
+        }
+
+        if (answer === ANSWER_OPTIONS.NO && index > currentIndex) {
+          return { ...check, inactive: true, answer: ANSWER_OPTIONS.UNANSWERED }
         }
 
         return check
       })
 
-      set({ checks: newChecks })
+      set({ checks: newChecks, selectedCheck: newCheck })
     },
 
     reset: () => {
       set(initialState)
+    },
+
+    sendResults: async () => {
+      const { checks } = get()
+
+      const checkResults = checks.map(({ id, answer }) => ({
+        checkId: id,
+        value: answer,
+      }))
+
+      try {
+        // @ts-ignore: Issues with immer wrapper. Find a way to fix this
+        set(state => {
+          state.meta.isLoading = true
+        })
+        await submitCheckResults(checkResults)
+        // @ts-ignore: Issues with immer wrapper. Find a way to fix this
+        set(state => {
+          state.resultsSubmitted = true
+        })
+      } catch (error) {
+        // @ts-ignore: Issues with immer wrapper. Find a way to fix this
+        set(state => {
+          state.meta.error = error
+          state.meta.hasError = true
+        })
+      } finally {
+        // @ts-ignore: Issues with immer wrapper. Find a way to fix this
+        set(state => {
+          state.meta.isLoading = false
+        })
+      }
     },
   } as Actions)
 

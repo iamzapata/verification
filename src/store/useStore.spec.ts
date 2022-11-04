@@ -42,13 +42,24 @@ describe('useStore', () => {
   })
 
   it('initializes state', () => {
-    const { checks, meta } = getState()
-    expect(checks).toEqual([])
-    expect(meta).toEqual({
-      error: null,
-      hasError: false,
-      isLoading: true,
-    })
+    expect(getState()).toMatchInlineSnapshot(`
+      {
+        "addAnswer": [Function],
+        "checks": [],
+        "getChecks": [Function],
+        "isValid": [Function],
+        "meta": {
+          "error": null,
+          "hasError": false,
+          "isLoading": true,
+        },
+        "reset": [Function],
+        "resultsSubmitted": false,
+        "selectedCheck": null,
+        "sendResults": [Function],
+        "setSelected": [Function],
+      }
+    `)
   })
 
   describe('getChecks', () => {
@@ -111,6 +122,72 @@ describe('useStore', () => {
     })
   })
 
+  describe('submitCheckResults', () => {
+    it('can getChecks checks', async () => {
+      const { sendResults, getChecks } = getState()
+
+      vi.spyOn(API, 'submitCheckResults').mockImplementationOnce(() =>
+        Promise.resolve(mockChecks())
+      )
+
+      vi.spyOn(API, 'fetchChecks').mockImplementationOnce(() =>
+        Promise.resolve(mockChecks())
+      )
+
+      await act(() => {
+        return getChecks()
+      })
+
+      await act(() => {
+        return sendResults()
+      })
+
+      const { resultsSubmitted } = getState()
+
+      expect(resultsSubmitted).toEqual(true)
+      expect(API.submitCheckResults).toHaveBeenCalledWith([
+        {
+          checkId: 'bbb',
+          value: 'UNANSWERED',
+        },
+        {
+          checkId: 'ccc',
+          value: 'UNANSWERED',
+        },
+        {
+          checkId: 'aaa',
+          value: 'UNANSWERED',
+        },
+      ])
+    })
+  })
+
+  describe('setSelected', () => {
+    it('can set selected check', async () => {
+      const { setSelected, getChecks } = getState()
+
+      const selectedMock: Check = {
+        id: 'zzz',
+        priority: 1,
+        description: 'test',
+        answer: 'YES',
+        inactive: false,
+      }
+
+      await act(() => {
+        return getChecks()
+      })
+
+      act(() => {
+        return setSelected(selectedMock)
+      })
+
+      const { selectedCheck } = getState()
+
+      expect(selectedCheck).toEqual(selectedMock)
+    })
+  })
+
   describe('addAnswer', () => {
     it('returns early when no checks present in state', () => {
       const { addAnswer } = getState()
@@ -167,6 +244,45 @@ describe('useStore', () => {
 
       expect(updatedCheck.answer).toEqual('YES')
       expect(nextItem.inactive).toEqual(false)
+    })
+
+    it('marks following checks as "inactive" and "UNANSWERED" if current answer is "NO"', async () => {
+      const { addAnswer, getChecks } = getState()
+
+      await act(() => {
+        return getChecks()
+      })
+
+      let checks = getState().checks
+
+      act(() => addAnswer(checks[0], 'YES'))
+      act(() => addAnswer(checks[1], 'YES'))
+      act(() => addAnswer(checks[2], 'YES'))
+
+      checks = getState().checks
+
+      act(() => addAnswer(checks[0], 'NO'))
+
+      checks = getState().checks
+      const [first, second, third] = checks
+      expect(first.answer).toEqual('NO')
+      expect(second).toMatchObject({ inactive: true, answer: 'UNANSWERED' })
+      expect(third).toMatchObject({ inactive: true, answer: 'UNANSWERED' })
+    })
+
+    it('marks answered check as selected', async () => {
+      const { getChecks, addAnswer } = getState()
+
+      await act(() => {
+        return getChecks()
+      })
+
+      const { checks } = getState()
+
+      act(() => addAnswer(checks[1], 'YES'))
+
+      const { selectedCheck } = getState()
+      expect(selectedCheck?.id).toEqual(checks[1].id)
     })
 
     it('preserves checks order after update', async () => {
