@@ -1,5 +1,5 @@
 .Button {
-  font-weight: 500;
+  --button-highlight-color: var(--highlight-color);
   line-height: 1;
   letter-spacing: 0.4px;
   text-align: center;
@@ -49,7 +49,7 @@
 }
 
 .Button:hover:not(:disabled):not(.isSelected) {
-  background-color: var(--highlight-color);
+  background-color: var(--button-highlight-color);
 }
 
 .Button:enabled:hover,
