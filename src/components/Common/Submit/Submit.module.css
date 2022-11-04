@@ -1,2 +1,8 @@
 .Submit {
+  --button-highlight-color: var(--primary-color);
+  height: 35px;
+  font-weight: 500;
+  text-transform: uppercase;
+  background-color: var(--primary-color);
+  color: var(--color-white);
 }
