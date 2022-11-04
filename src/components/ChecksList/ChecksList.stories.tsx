@@ -19,8 +19,3 @@ export const Default = Template.bind({})
 Default.args = {
   checks,
 }
-
-export const Inactive = Template.bind({})
-Inactive.args = {
-  checks,
-}

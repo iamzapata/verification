@@ -18,6 +18,11 @@ Default.args = {
   check,
 }
 
+export const Answered = Template.bind({})
+Answered.args = {
+  check: { ...check, answer: 'YES' },
+}
+
 export const Inactive = Template.bind({})
 Inactive.args = {
   inactive: true,

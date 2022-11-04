@@ -28,6 +28,11 @@ HasError.args = {
   hasError: true,
 }
 
+export const Submitted = Template.bind({})
+Submitted.args = {
+  resultsSubmitted: true,
+}
+
 export const Unanswered = Template.bind({})
 Unanswered.args = {
   checks,
@@ -36,6 +41,7 @@ Unanswered.args = {
 
 firstCheck = getNthCheck(0)
 firstCheck.answer = 'NO'
+firstCheck.inactive = false
 export const Answered = Template.bind({})
 Answered.args = {
   checks: [firstCheck, ...mockChecks.slice(1)],

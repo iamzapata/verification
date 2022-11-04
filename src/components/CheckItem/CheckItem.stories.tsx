@@ -35,6 +35,16 @@ AnsweredNo.args = {
   },
 }
 
+export const Selected = Template.bind({})
+Selected.args = {
+  check: {
+    ...check,
+    inactive: false,
+    answer: 'UNANSWERED',
+  },
+  selected: true,
+}
+
 export const Inactive = Template.bind({})
 Inactive.args = {
   check: {
