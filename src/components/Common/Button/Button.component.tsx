@@ -36,6 +36,7 @@ function Button({
       disabled={disabled}
       type={type}
       onClick={onClick}
+      tabIndex={inactive ? -1 : 0}
     >
       {children}
     </button>

@@ -136,4 +136,16 @@ describe('<Button />', () => {
 
     expect(onClickMock).not.toHaveBeenCalledTimes(1)
   })
+
+  it('toggles tabIndex between 0 and -1 based on inactive state', () => {
+    const { getByText, rerender } = render(<Button>Bar</Button>)
+
+    const button = getByText(/bar/i)
+
+    expect(button).toHaveAttribute('tabIndex', '0')
+
+    rerender(<Button inactive>Bar</Button>)
+
+    expect(button).toHaveAttribute('tabIndex', '-1')
+  })
 })
