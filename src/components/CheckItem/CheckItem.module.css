@@ -11,3 +11,7 @@
   color: var(--text-color-disabled);
   background-color: transparent;
 }
+
+.isSelected {
+  background-color: var(--highlight-color);
+}
