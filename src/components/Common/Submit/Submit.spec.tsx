@@ -2,7 +2,6 @@ import { render, renderHook } from '@testing-library/react'
 import { Submit } from './Submit.component'
 import { renderWithUserEvent } from '@testing'
 import { type Store, useStore } from '@store'
-import { act } from 'react-dom/test-utils'
 
 let store: Store
 describe('<Submit />', () => {
