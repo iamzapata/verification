@@ -3,13 +3,15 @@ import { Submit } from './Submit.component'
 import { renderWithUserEvent } from '@testing'
 import { type Store, useStore } from '@store'
 
-let store: Store
+let getState: () => Store
 describe('<Submit />', () => {
   beforeEach(() => {
-    if (store) {
-      store.reset()
+    if (getState) {
+      getState().reset()
     }
-    store = renderHook(() => useStore()).result.current
+    const { result } = renderHook(() => useStore())
+
+    getState = () => result.current
   })
   it('renders', () => {
     expect(() => render(<Submit disabled />)).not.toThrow()
@@ -28,24 +30,24 @@ describe('<Submit />', () => {
   })
 
   it('calls sendResults when it is not disabled', async () => {
-    vi.spyOn(store, 'sendResults')
+    vi.spyOn(getState(), 'sendResults')
 
     const { user, getByText } = renderWithUserEvent(<Submit disabled={false} />)
     const submit = getByText(/submit/i)
 
     await user.click(submit)
 
-    expect(store.sendResults).toHaveBeenCalledTimes(1)
+    expect(getState().sendResults).toHaveBeenCalledTimes(1)
   })
 
   it('does not call sendResults when it is disabled', async () => {
-    vi.spyOn(store, 'sendResults')
+    vi.spyOn(getState(), 'sendResults')
 
     const { user, getByText } = renderWithUserEvent(<Submit disabled />)
     const submit = getByText(/submit/i)
 
     await user.click(submit)
 
-    expect(store.sendResults).not.toHaveBeenCalled()
+    expect(getState().sendResults).not.toHaveBeenCalled()
   })
 })

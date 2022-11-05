@@ -9,13 +9,14 @@ vi.spyOn(API, 'fetchChecks').mockImplementation(() =>
   Promise.resolve(mockChecks)
 )
 
-let store: Store
+let getState: () => Store
 describe('<App />', () => {
   beforeEach(() => {
-    if (store) {
-      store.reset()
+    if (getState) {
+      getState().reset()
     }
-    store = renderHook(() => useStore()).result.current
+    const { result } = renderHook(() => useStore())
+    getState = () => result.current
   })
   it('should render', () => {
     expect(async () => {
@@ -26,14 +27,14 @@ describe('<App />', () => {
   })
 
   it('should call "getChecks" data on render', async () => {
-    vi.spyOn(store, 'getChecks')
+    vi.spyOn(getState(), 'getChecks')
 
     await act(() => {
       render(<App />)
     })
 
     await waitFor(() => {
-      expect(store.getChecks).toHaveBeenCalledTimes(1)
+      expect(getState().getChecks).toHaveBeenCalledTimes(1)
     })
   })
 })
