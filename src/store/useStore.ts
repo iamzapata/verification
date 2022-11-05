@@ -29,6 +29,9 @@ export type Store = State & Actions
 type SetState<T> = StoreApi<T>['setState']
 type GetState<T> = StoreApi<T>['getState']
 
+const getSorted = (checks: Check[]) =>
+  checks.slice(0).sort((a, b) => a.priority - b.priority)
+
 const initialState: State = {
   meta: {
     isLoading: true,
@@ -45,7 +48,7 @@ const createActions = (set: SetState<Store>, get: GetState<Store>) =>
     getChecks: async () => {
       try {
         const checks = <Check[]>await fetchChecks()
-        const sorted = checks.slice(0).sort((a, b) => a.priority - b.priority)
+        const sorted = getSorted(checks)
         const checksInactive = sorted.map((check, i) => {
           return {
             ...check,
@@ -121,7 +124,9 @@ const createActions = (set: SetState<Store>, get: GetState<Store>) =>
         return check
       })
 
-      set({ checks: newChecks, selectedCheck: newCheck })
+      const sorted = getSorted(newChecks)
+
+      set({ checks: sorted, selectedCheck: newCheck })
     },
 
     reset: () => {
