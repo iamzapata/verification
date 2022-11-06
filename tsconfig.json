@@ -19,7 +19,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "types": [
-      "vitest/globals"
+      "vitest/globals",
+      "cypress"
     ],
     "jsx": "react-jsx",
     "baseUrl": "./",
@@ -46,7 +47,14 @@
   },
   "include": [
     "src"
-  ],
+,
+"cypress/e2e/App.cy.tsx",
+"cypress/e2e/App.cy.ts",
+"cypress/e2e/App.cy.ts",
+"cypress/e2e/App.cy.ts",
+"cypress/e2e/App.cy.ts",
+"cypress/e2e/App.cy.tsx"
+],
   "exclude": [
     "vitest.config.js"
   ],
