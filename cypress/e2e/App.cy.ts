@@ -103,3 +103,5 @@ describe('<App /> interactions with keyboard', () => {
     cy.get('.App').contains(/Oh no, something went wrong!|Results submitted!/g)
   })
 })
+
+export {}

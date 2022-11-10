@@ -63,7 +63,7 @@ describe('<ChecksList />', () => {
   it('should call "setSelected" with previous check when "ArrowUp" is triggered', async () => {
     vi.spyOn(getState(), 'setSelected')
 
-    const { addAnswer, getChecks, setSelected } = getState()
+    const { addAnswer, getChecks } = getState()
 
     await act(() => {
       return getChecks()
