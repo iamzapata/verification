@@ -14,19 +14,25 @@ vi.mock('../ButtonGroup', () => ({
 
 describe('<CheckItem />', () => {
   it('renders', () => {
-    expect(() => render(<CheckItem check={check} />)).not.toThrow()
+    expect(() =>
+      render(<CheckItem check={check} selected={false} />)
+    ).not.toThrow()
   })
 
   it('should set the correct className', () => {
-    const { container, rerender } = render(<CheckItem check={check} />)
+    const { container, rerender } = render(
+      <CheckItem check={check} selected={false} />
+    )
     expect(container.firstChild).toHaveClass('CheckItem isInactive')
 
-    rerender(<CheckItem check={{ ...check, inactive: false }} />)
+    rerender(
+      <CheckItem check={{ ...check, inactive: false }} selected={false} />
+    )
     expect(container.firstChild).toHaveClass('CheckItem')
   })
 
   it('renders description and <ButtonGroup />', () => {
-    const { getByText } = render(<CheckItem check={check} />)
+    const { getByText } = render(<CheckItem check={check} selected={false} />)
 
     const description = getByText(/Verify mock question/i)
     expect(description).toBeInTheDocument()
