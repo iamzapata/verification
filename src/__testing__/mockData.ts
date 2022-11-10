@@ -11,7 +11,7 @@ export const mockChecks: Check[] = [
   {
     id: 'bbb',
     priority: 5,
-    description: 'Veriff supports presented document',
+    description: 'Verification supports presented document',
     inactive: true,
     answer: 'UNANSWERED',
   },

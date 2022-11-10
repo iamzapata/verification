@@ -14,7 +14,9 @@ describe('<App /> interactions with clicks', () => {
 
     cy.contains('Submit').should('be.disabled')
 
-    cy.contains('Veriff supports presented document').contains('Yes').click()
+    cy.contains('Verification supports presented document')
+      .contains('Yes')
+      .click()
 
     cy.contains('Submit').should('be.disabled')
 
@@ -36,7 +38,9 @@ describe('<App /> interactions with clicks', () => {
 
     cy.contains('Submit').should('be.disabled')
 
-    cy.contains('Veriff supports presented document').contains('No').click()
+    cy.contains('Verification supports presented document')
+      .contains('No')
+      .click()
 
     cy.contains('Submit').click()
 
