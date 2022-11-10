@@ -46,17 +46,12 @@
     }
   },
   "include": [
-    "src"
-,
-"cypress/e2e/App.cy.tsx",
-"cypress/e2e/App.cy.ts",
-"cypress/e2e/App.cy.ts",
-"cypress/e2e/App.cy.ts",
-"cypress/e2e/App.cy.ts",
-"cypress/e2e/App.cy.tsx"
-],
+    "src",
+    "cypress"
+  ],
   "exclude": [
-    "vitest.config.js"
+    "vitest.config.js",
+    "cypress.config.ts"
   ],
   "references": [
     {
