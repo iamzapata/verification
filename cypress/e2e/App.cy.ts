@@ -1,12 +1,6 @@
 describe('<App /> interactions with clicks', () => {
   beforeEach(() => {
     cy.visit('http://localhost:4000/')
-    cy.wait(1000)
-    cy.get('.App').then($el => {
-      if ($el.text().includes('Oh no, something went wrong!')) {
-        cy.visit('http://localhost:4000/')
-      }
-    })
   })
 
   it('completes all checks with YES', () => {
@@ -103,3 +97,5 @@ describe('<App /> interactions with keyboard', () => {
     cy.get('.App').contains(/Oh no, something went wrong!|Results submitted!/g)
   })
 })
+
+export {}

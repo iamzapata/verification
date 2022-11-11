@@ -3,8 +3,17 @@ import { renderWithUserEvent } from '@testing'
 import { ChecksList } from './ChecksList.component'
 import { mockChecks } from '@testing'
 import { type Store, useStore } from '@store'
+import * as API from '@api'
 
 const checks = mockChecks
+
+vi.mock('../CheckItem', () => ({
+  CheckItem: () => 'CheckItemMock',
+}))
+
+vi.spyOn(API, 'fetchChecks').mockImplementation(() =>
+  Promise.resolve(mockChecks)
+)
 
 let getState: () => Store
 describe('<ChecksList />', () => {
@@ -32,7 +41,7 @@ describe('<ChecksList />', () => {
     expect(children?.length).toEqual(4)
 
     Array.from(children).forEach(child =>
-      expect(child).toHaveClass('CheckItem')
+      expect(child).toHaveTextContent('CheckItemMock')
     )
   })
 
@@ -63,7 +72,7 @@ describe('<ChecksList />', () => {
   it('should call "setSelected" with previous check when "ArrowUp" is triggered', async () => {
     vi.spyOn(getState(), 'setSelected')
 
-    const { addAnswer, getChecks, setSelected } = getState()
+    const { addAnswer, getChecks } = getState()
 
     await act(() => {
       return getChecks()
