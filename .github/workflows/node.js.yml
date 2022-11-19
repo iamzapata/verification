@@ -24,4 +24,5 @@ jobs:
       - run: npm ci
       - run: npm run test
       - run: npm run dev & sleep 5 && npm run cypress:run
+      - run: npm run build
       - run: killall node
